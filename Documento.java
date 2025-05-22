@@ -1,26 +1,24 @@
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Documento {
     private String nomeArquivo;
     private String nomeUsuario;
-    private LocalDateTime horarioSolicitacao;
-    private LocalDateTime horarioImpressao;
+    private Date horarioSolicitacao;
+    private Date horarioImpressao;
 
     public Documento(String nomeArquivo, String nomeUsuario) {
         this.nomeArquivo = nomeArquivo;
         this.nomeUsuario = nomeUsuario;
-        this.horarioSolicitacao = LocalDateTime.now();
+        this.horarioSolicitacao = new Date(); // Captura o horário atual
     }
 
     public void registrarImpressao() {
-        this.horarioImpressao = LocalDateTime.now();
+        this.horarioImpressao = new Date(); // Registra o horário atual da impressão
     }
 
     public long calcularTempoEspera() {
-        if (horarioImpressao == null) {
-            return java.time.Duration.between(horarioSolicitacao, LocalDateTime.now()).toSeconds();
-        }
-        return java.time.Duration.between(horarioSolicitacao, horarioImpressao).toSeconds();
+        Date fim = (horarioImpressao == null) ? new Date() : horarioImpressao;
+        return (fim.getTime() - horarioSolicitacao.getTime()) / 1000; // Diferença em segundos
     }
 
     public String getNomeArquivo() {
@@ -31,7 +29,7 @@ public class Documento {
         return nomeUsuario;
     }
 
-    public LocalDateTime getHorarioSolicitacao() {
+    public Date getHorarioSolicitacao() {
         return horarioSolicitacao;
     }
 
