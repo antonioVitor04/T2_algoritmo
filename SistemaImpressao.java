@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 public class SistemaImpressao {
     
     private static List<String> linhasArquivo = new ArrayList<>();
-    private static int indiceAtual = 0; // Controla a próxima linha a ser lida
+    private static int indiceAtual = 0;
 
     private static void carregarArquivo(String caminhoArquivo) {
         try (Scanner fileScanner = new Scanner(new File(caminhoArquivo))) {
@@ -20,7 +20,6 @@ public class SistemaImpressao {
         }
     }
 
-    // Método para obter o próximo documento do arquivo
     private static Documento obterProximoDocumento() {
         if (indiceAtual + 1 >= linhasArquivo.size()) {
             throw new RuntimeException("Não há mais documentos no arquivo de entrada.");
