@@ -1,26 +1,20 @@
-import java.util.Date;
+import java.util.Calendar;
 
 public class Documento {
+
+    // Dados
     private String nomeArquivo;
     private String nomeUsuario;
-    private Date horarioSolicitacao;
-    private Date horarioImpressao;
+    private Calendar horarioSolicitacao;
 
-    public Documento(String nomeArquivo, String nomeUsuario) {
+    // Construtor
+    public Documento(String nomeArquivo, String nomeUsuario, Calendar horarioSolicitacao) {
         this.nomeArquivo = nomeArquivo;
         this.nomeUsuario = nomeUsuario;
-        this.horarioSolicitacao = new Date(); // Captura o horário atual
+        this.horarioSolicitacao = horarioSolicitacao;
     }
 
-    public void registrarImpressao() {
-        this.horarioImpressao = new Date(); // Registra o horário atual da impressão
-    }
-
-    public long calcularTempoEspera() {
-        Date fim = (horarioImpressao == null) ? new Date() : horarioImpressao;
-        return (fim.getTime() - horarioSolicitacao.getTime()) / 1000; // Diferença em segundos
-    }
-
+    // Getters
     public String getNomeArquivo() {
         return nomeArquivo;
     }
@@ -29,13 +23,7 @@ public class Documento {
         return nomeUsuario;
     }
 
-    public Date getHorarioSolicitacao() {
+    public Calendar getHorarioSolicitacao() {
         return horarioSolicitacao;
-    }
-
-    @Override
-    public String toString() {
-        return "Documento: " + nomeArquivo + " | Usuário: " + nomeUsuario + 
-               " | Solicitado em: " + horarioSolicitacao;
     }
 }
